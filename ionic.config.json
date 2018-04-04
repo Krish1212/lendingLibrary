@@ -1,0 +1,8 @@
+{
+  "name": "lendingLibrary",
+  "app_id": "57a62c9f",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
