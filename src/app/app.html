@@ -1,1 +1,18 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="sideContent" type="overlay">
+    <ion-header>
+        <ion-title>Menu</ion-title>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <ion-item>
+                <h2>Welcome User</h2>
+            </ion-item>
+            <!--TODO the pages below has to be made dynamic-->
+            <!--there is already a method to do it. just need -->
+            <!--to implement it-->
+            <button menuClose ion-item>Page 1</button>
+            <button menuClose ion-item>Page 2</button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #sideContent swipebackEnabled="false"></ion-nav>
