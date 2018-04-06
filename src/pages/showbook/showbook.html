@@ -20,10 +20,11 @@
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi doloremque iste voluptate culpa, sapiente pariatur aut, illo tempore aliquid magni delectus harum officia amet eos dolores repudiandae numquam facilis? Alias?</p>
     </ion-card-content>
     <ion-row>
-      <ion-col>
-        <button ion-button icon-left small clear>
-          <ion-icon name="star"></ion-icon>
-          Favourite
+      <ion-col ng-init="flag=true">
+        <button ion-button icon-left small clear (click)="flag=!flag">
+          <ion-icon *ngIf="flag" name="ios-thumbs-up"></ion-icon>
+          <ion-icon name="ios-thumbs-up-outline" *ngIf="!flag"></ion-icon>
+          12 Likes
         </button>
       </ion-col>
       <ion-col>
