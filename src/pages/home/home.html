@@ -17,4 +17,39 @@
 <ion-content padding>
   <h3>Welcome to Lending Library!</h3>
   <p>Your one stop shop to lend your favourite books right at your door step from your neighbours.</p>
+
+  <hr>
+
+  <ion-row>
+    <ion-col col-9>
+      <ion-item >
+        <ion-input type="text" [(ngModel)]="book.title" placeholder="Input book title"></ion-input>
+      </ion-item>
+      <ion-item >
+         <ion-input type="text" [(ngModel)]="book.author" placeholder="Input book author"></ion-input>
+      </ion-item>
+      <ion-item >
+         <ion-input type="text" [(ngModel)]="book.pages" placeholder="Input book pages"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-3>
+      <button ion-button (click)="saveBook()">Add New!</button>
+      <button ion-button (click)="updateBook()">Edit!</button>
+    </ion-col>
+  </ion-row>
+
+  <!--ul>
+    <li *ngFor="let book of books" (dblclick)="deleteBook($event, book)">{{book.title}} | {{book.author}} | {{book.pages}}</li>
+  </ul-->
+
+  <ion-list>
+    <ion-item>
+      <ion-item *ngFor="let book of books" (click)="editBook(book)" (dblclick)="deleteBook($event, book)">
+        {{book.title}} | {{book.author}} | {{book.pages}}        
+      </ion-item>
+    </ion-item>
+  </ion-list>
+  <p><small>* Single click to Edit</small></p>
+  <p><small>* Double click to Delete</small></p>
+  
 </ion-content>
