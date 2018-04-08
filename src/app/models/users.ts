@@ -6,4 +6,6 @@ export interface Users{
     pin?:string;
     address?:string;
     picture?:string;
+    likedBooks?:string; // todo - change to array
+    totalEarning?:string;
 }

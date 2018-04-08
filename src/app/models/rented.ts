@@ -3,7 +3,7 @@ export interface Rented{
     receiver:string;
     bookid:string;
     date:Date;
-    durationCommited:string;
-    paid:string;
+    durationCommited:string; // generally a week
+    paid:boolean;
     price:string;
 }

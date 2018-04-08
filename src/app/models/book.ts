@@ -4,7 +4,8 @@ export interface Book{
     author?:string;
     cover?:string;
     pages?:string;
-    price?:string;
+    origPrice?:string;
     rentPrice?:string;
     rating?:string;
+    genre?:string; // TODO - array of genre/tags
 };
