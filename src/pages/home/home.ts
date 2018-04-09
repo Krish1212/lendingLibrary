@@ -79,19 +79,18 @@ export class HomePage {
     });
     loader.present();
     const fileTransfer: FileTransferObject = this.transfer.create();
-  
+    let filename = this.imageURI.split('/').pop();
     let options: FileUploadOptions = {
       fileKey: 'profile',
-      fileName: 'profile',
+      fileName: filename,
       chunkedMode: false,
-      mimeType: "image/jpeg",
+      mimeType: "image/jpg",
       headers: {}
     }
   
-    fileTransfer.upload(this.imageURI, 'gs://lendinglibrary-78813.appspot.com/user_pic/', options)
-      .then((data) => {
+    fileTransfer.upload(this.imageURI, 'gs://lendinglibrary-78813.appspot.com/files/user_pic/', options).then((data) => {
       console.log(data+" Uploaded Successfully");
-      this.imageFileName = "gs://lendinglibrary-78813.appspot.com/user_pic/profile.jpg"
+      this.imageFileName = "gs://lendinglibrary-78813.appspot.com/files/user_pic/" + options.fileName + ".jpg";
       loader.dismiss();
       this.presentToast("Image uploaded successfully");
     }, (err) => {
