@@ -9,4 +9,5 @@ export interface Users{
     likedBooks?:string; // todo - change to array
     totalEarning?:string;
     following?:string; // todo - array of other users
+    blocked?:string;
 }
