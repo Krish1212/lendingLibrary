@@ -19,6 +19,10 @@ import { FireBaseService } from './../providers/firebase-service';
 // INTERFACE
 import { Book } from './models/book';
 import { Genre } from './models/genre';
+import { Earnings } from './models/earnings';
+import { Users } from './models/users';
+import { Rented } from './models/rented';
+import { LikedBooks } from './models/likedBooks';
 
 // PAGES
 import { ShowbookPage } from '../pages/showbook/showbook';

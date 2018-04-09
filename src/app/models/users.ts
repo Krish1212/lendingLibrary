@@ -8,4 +8,5 @@ export interface Users{
     picture?:string;
     likedBooks?:string; // todo - change to array
     totalEarning?:string;
+    following?:string; // todo - array of other users
 }
