@@ -1,5 +1,4 @@
 export const baseConfigs = {
-
     firebaseConfig: {
         apiKey: "AIzaSyAiXdest_5ukMdmZewDJWmLrXmOe5KAba0",
         authDomain: "lendinglibrary-78813.firebaseapp.com",
