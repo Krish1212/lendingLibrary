@@ -2,8 +2,8 @@ import { Book } from './../../app/models/book';
 import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController } from 'ionic-angular';
 import { FireBaseService } from './../../providers/firebase-service';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { storage } from 'firebase/storage';
 
 @Component({
   selector: 'page-home',
@@ -21,8 +21,7 @@ export class HomePage {
   
   constructor(public navCtrl: NavController, 
     public fireService:FireBaseService, 
-    public transfer: FileTransfer, 
-    public camera: Camera, 
+    public camera: Camera,
     public loadingCtrl:LoadingController, 
     public toastCtrl: ToastController) {
     // load book collection from firestore
@@ -58,59 +57,30 @@ export class HomePage {
       this.fireService.updateBook(this.book);
     }
   }
-  getImage() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-    }
-  
-    this.camera.getPicture(options).then((imageData) => {
-      this.imageURI = imageData;
-    }, (err) => {
-      console.log(err);
-      this.presentToast(err);
-    });
-  }
 
-  uploadFile() {
-    let loader = this.loadingCtrl.create({
-      content: "Uploading..."
-    });
-    loader.present();
-    const fileTransfer: FileTransferObject = this.transfer.create();
-    let filename = this.imageURI.split('/').pop();
-    let options: FileUploadOptions = {
-      fileKey: 'profile',
-      fileName: filename,
-      chunkedMode: false,
-      mimeType: "image/jpg",
-      headers: {}
+  async takePhoto(){
+    try{
+      //Define the camera options
+      const options: CameraOptions = {
+        quality: 50,
+        targetHeight:600,
+        targetWidth: 600,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation:true
+      }
+  
+      //capture the picture
+      const result = await this.camera.getPicture(options);
+      const image = `data:image/jpeg;base64,${result}`;
+
+      const pictures = storage.ref('user_pic/profile');
+      pictures.putString(image,'data_url');
     }
-  
-    fileTransfer.upload(this.imageURI, 'gs://lendinglibrary-78813.appspot.com/files/user_pic/', options).then((data) => {
-      console.log(data+" Uploaded Successfully");
-      this.imageFileName = "gs://lendinglibrary-78813.appspot.com/files/user_pic/" + options.fileName + ".jpg";
-      loader.dismiss();
-      this.presentToast("Image uploaded successfully");
-    }, (err) => {
-      console.log(err);
-      loader.dismiss();
-      this.presentToast(err);
-    });
-  }
-  presentToast(msg) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 3000,
-      position: 'bottom'
-    });
-  
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-  
-    toast.present();
+    catch(e){
+      console.error(e);
+    }
   }
 
 }

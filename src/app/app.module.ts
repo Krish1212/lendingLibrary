@@ -13,9 +13,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-//FILE STORAGE
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
+//CAMERA
 import { Camera } from '@ionic-native/camera';
 
 // SERVICES
@@ -70,10 +68,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     FireBaseService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FileTransfer,
-    FileTransferObject,
-    File,
-    Camera
+    Camera,
   ]
 })
 export class AppModule {}
