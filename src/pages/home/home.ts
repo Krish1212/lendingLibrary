@@ -75,7 +75,7 @@ export class HomePage {
       const result = await this.camera.getPicture(options);
       const image = `data:image/jpeg;base64,${result}`;
 
-      const pictures = storage.ref('user_pic/profile');
+      const pictures = storage().ref('user_pic/profile');
       pictures.putString(image,'data_url');
     }
     catch(e){
