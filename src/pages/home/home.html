@@ -52,9 +52,18 @@
   <p><small>* Single click to Edit</small></p>
   <p><small>* Double click to Delete</small></p>
   
-  <!--image upload UI-->
-  <ion-item>
-    <button ion-button color="secondary" (click)="takePhoto()">Capture</button>
-  </ion-item>
 
+  <ion-item *ngIf="currentUpload">
+    <p>Progress: {{currentUpload?.name}}</p>
+    <p>Complete:  {{currentUpload?.progress}}%</p>
+  </ion-item>
+  <ion-item>
+    <ion-label>Pick a file to upload
+      <input type="file" (change)="detectFiles($event)">
+    </ion-label>
+  </ion-item>
+  <button ion-button color="secondary" [disabled]="!selectedFiles" (click)="uploadFile()">Upload File</button>
+  <ion-item *ngIf="currentUpload">
+    <img src="{{currentUpload.url}}" alt-img="Preview">
+  </ion-item>
 </ion-content>

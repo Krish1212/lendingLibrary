@@ -3,7 +3,9 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController } from 'ionic-angular';
 import { FireBaseService } from './../../providers/firebase-service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { storage } from 'firebase/storage';
+import { UploadProvider } from '../../providers/upload';
+import { Upload } from '../../app/models/upload';
+
 
 @Component({
   selector: 'page-home',
@@ -16,14 +18,15 @@ export class HomePage {
     author:'',
     pages:''
   };
-  imageURI:any;
-  imageFileName:any;
+  selectedFiles: FileList;
+  currentUpload = {} as Upload;
   
   constructor(public navCtrl: NavController, 
     public fireService:FireBaseService, 
     public camera: Camera,
     public loadingCtrl:LoadingController, 
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController, 
+    public upSvc: UploadProvider) {
     // load book collection from firestore
     this.fireService.getBooks().subscribe(books => {
       this.books = books;
@@ -57,8 +60,20 @@ export class HomePage {
       this.fireService.updateBook(this.book);
     }
   }
-
-  async takePhoto(){
+  detectFiles(event) {
+      this.selectedFiles = event.target.files;
+  }
+  uploadFile() {
+    this.currentUpload.file = this.selectedFiles[0];
+    console.log(this.currentUpload.file);
+    let filePath = 'user_pic';
+    this.upSvc.uploadFile(filePath,this.currentUpload).subscribe((success) => {
+      console.log(this.currentUpload.progress);
+    }, (failure) => {
+      console.log(failure);
+    });
+  }
+  /* async takePhoto(){
     try{
       //Define the camera options
       const options: CameraOptions = {
@@ -81,6 +96,6 @@ export class HomePage {
     catch(e){
       console.error(e);
     }
-  }
+  } */
 
 }

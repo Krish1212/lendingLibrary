@@ -37,6 +37,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 // PAGE components
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { UploadProvider } from '../providers/upload';
 
 // Include all imports into ngModule
 @NgModule({
@@ -52,6 +53,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BrowserModule,
     AngularFireModule.initializeApp(baseConfigs.firebaseConfig, 'angulafs'),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -69,6 +71,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     FireBaseService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
+    UploadProvider,
   ]
 })
 export class AppModule {}
