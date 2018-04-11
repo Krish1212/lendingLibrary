@@ -1,6 +1,6 @@
 import { Book } from './../../app/models/book';
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, Loading, LoadingController, ToastController } from 'ionic-angular';
 import { FireBaseService } from './../../providers/firebase-service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { UploadProvider } from '../../providers/upload';
@@ -20,6 +20,7 @@ export class HomePage {
   };
   selectedFiles: FileList;
   currentUpload = {} as Upload;
+  loading:Loading;
   
   constructor(public navCtrl: NavController, 
     public fireService:FireBaseService, 
@@ -64,14 +65,21 @@ export class HomePage {
       this.selectedFiles = event.target.files;
   }
   uploadFile() {
+    this.loading = this.loadingCtrl.create({
+      spinner:'bubbles',
+      content:`Uploading...Please wait`,
+    });
     this.currentUpload.file = this.selectedFiles[0];
     console.log(this.currentUpload.file);
     let filePath = 'user_pic';
     this.upSvc.uploadFile(filePath,this.currentUpload).subscribe((success) => {
-      console.log(this.currentUpload.progress);
+      this.loading.dismiss().then(() => {
+        console.log(this.currentUpload.progress);
+      });
     }, (failure) => {
       console.log(failure);
     });
+    this.loading.present();
   }
   /* async takePhoto(){
     try{
