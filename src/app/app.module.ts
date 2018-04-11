@@ -20,12 +20,15 @@ import { Camera } from '@ionic-native/camera';
 import { FireBaseService } from './../providers/firebase-service';
 
 // INTERFACE
+import { Boilerplate } from './models/boilerplate';
 import { Book } from './models/book';
 import { Genre } from './models/genre';
 import { Earnings } from './models/earnings';
 import { Users } from './models/users';
 import { Rented } from './models/rented';
 import { LikedBooks } from './models/likedBooks';
+import { ComplaintType } from './models/compliantType';
+import { Complaints } from './models/complaints';
 
 // PAGES
 import { ShowbookPage } from '../pages/showbook/showbook';
