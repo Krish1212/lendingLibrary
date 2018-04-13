@@ -19,7 +19,7 @@ export class HomePage {
     pages:''
   };
   selectedFiles: FileList;
-  currentUpload = {} as Upload;
+  currentUpload = new Upload();
   loading:Loading;
   
   constructor(public navCtrl: NavController, 
