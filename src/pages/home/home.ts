@@ -5,7 +5,7 @@ import { FireBaseService } from './../../providers/firebase-service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { UploadProvider } from '../../providers/upload';
 import { Upload } from '../../app/models/upload';
-
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-home',
@@ -21,9 +21,12 @@ export class HomePage {
   selectedFiles: FileList;
   currentUpload = {} as Upload;
   loading:Loading;
+  lat:any;
+  lng:any;
   
   constructor(public navCtrl: NavController, 
     public fireService:FireBaseService, 
+    public geolocation: Geolocation,
     public camera: Camera,
     public loadingCtrl:LoadingController, 
     public toastCtrl: ToastController, 
@@ -32,6 +35,16 @@ export class HomePage {
     this.fireService.getBooks().subscribe(books => {
       this.books = books;
     });
+
+  }
+
+  ionViewDidLoad(){
+    this.geolocation.getCurrentPosition().then((pos) => {
+      this.lat = pos.coords.latitude;
+      this.lng = pos.coords.longitude;
+   }).catch((error) => {
+       console.log('Error getting location', error);
+     });
   }
 
   saveBook(){

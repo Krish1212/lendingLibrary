@@ -15,14 +15,14 @@ export class UploadProvider {
     return Observable.create(observer => {
       console.log(folder);
       const task = this.storage.ref(`${folder}/${upload.file.name}_${upload.createdAt}`);
-      task.put(upload.file).then(success => {
+      /*task.put(upload.file).then(success => {
         upload.progress = (success.bytesTransferred / success.totalBytes) * 100;
         upload.url = success.downloadURL;
         upload.name = upload.file.name;
         observer.next(success);
       }).catch(failure => {
         observer.error(failure);
-      });
+      });*/
     });
   }
 
