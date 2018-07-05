@@ -73,6 +73,7 @@ import { UploadProvider } from '../providers/upload';
     StatusBar,
     SplashScreen,
     FireBaseService,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
     UploadProvider,
